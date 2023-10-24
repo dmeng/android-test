@@ -13,7 +13,7 @@ cd "${KOKORO_ARTIFACTS_DIR}/github/android-test-releases"
 
 apt-get update
 apt-cache showpkg openjdk-17-jdk
-apt-get install -y openjdk-17-jdk=17.0.8+7-1
+apt-get install -y openjdk-17-jdk=17.0.8.1+1~us1-0ubuntu1~20.04
 export JAVA_HOME="$(update-java-alternatives -l | grep "1.17" | head -n 1 | tr -s " " | cut -d " " -f 3)"
 
 cd gradle-tests

@@ -17,5 +17,7 @@ apt-get update
 apt-get install -y zulu17-jdk
 export JAVA_HOME="$(update-java-alternatives -l | grep "1.17" | head -n 1 | tr -s " " | cut -d " " -f 3)"
 
+if [[ -e /dev/kvm ]] && grep '^flags' /proc/cpuinfo | grep -qE 'vmx|svm'; then echo 'KVM is working'; else echo 'KVM not working'; fi
+
 cd gradle-tests
-./gradlew nexusOneApi30DebugAndroidTest -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
+./gradlew nexusOneApi30DebugAndroidTest --info

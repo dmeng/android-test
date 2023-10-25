@@ -18,4 +18,4 @@ apt-get install -y zulu17-jdk
 export JAVA_HOME="$(update-java-alternatives -l | grep "1.17" | head -n 1 | tr -s " " | cut -d " " -f 3)"
 
 cd gradle-tests
-./gradlew nexusOneApi30DebugAndroidTest
+./gradlew nexusOneApi30DebugAndroidTest -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true

@@ -5,6 +5,8 @@ set -e
 
 cd "${KOKORO_ARTIFACTS_DIR}/github/android-test-releases"
 
+cp "${KOKORO_GFILE_DIR}/github/android-test-releases/axt_m2repository.zip" .
+
 curl -s https://repos.azul.com/azul-repo.key | sudo gpg --dearmor -o /usr/share/keyrings/azul.gpg
 echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | sudo tee /etc/apt/sources.list.d/zulu.list
 apt-get update

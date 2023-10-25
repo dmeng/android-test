@@ -12,4 +12,4 @@ apt-get install -y zulu17-jdk
 export JAVA_HOME="$(update-java-alternatives -l | grep "1.17" | head -n 1 | tr -s " " | cut -d " " -f 3)"
 
 cd gradle-tests
-./gradlew nexusOneApi30DebugAndroidTest --info -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
+./gradlew :espresso:nexusOneApi30DebugAndroidTest --info -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect

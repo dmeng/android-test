@@ -5,9 +5,7 @@ set -e
 
 cd "${KOKORO_ARTIFACTS_DIR}/github/android-test-releases"
 
-mkdir maven_repo
-export MAVEN_CONFIG="${PWD}/maven_repo"
-unzip "${KOKORO_GFILE_DIR}/axt_m2repository.zip" maven_repo
+unzip "${KOKORO_GFILE_DIR}/axt_m2repository.zip" -d "/root/.m2"
 
 curl -s https://repos.azul.com/azul-repo.key | sudo gpg --dearmor -o /usr/share/keyrings/azul.gpg
 echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | sudo tee /etc/apt/sources.list.d/zulu.list

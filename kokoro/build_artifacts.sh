@@ -17,7 +17,5 @@ export JAVA_HOME="$(update-java-alternatives -l | grep "1.17" | head -n 1 | tr -
 cd gradle-tests
 cp gradle/verification-metadata.xml.kokoro gradle/verification-metadata.xml
 
-./gradlew nexusOneDebugAndroidTest --write-verification-metadata sha256,pgp -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect -Dandroid.experimental.androidTest.numManagedDeviceShards=1
-
-cat gradle/verification-metadata.xml
+./gradlew nexusOneDebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect -Dandroid.experimental.androidTest.numManagedDeviceShards=1
 

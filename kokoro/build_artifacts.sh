@@ -15,5 +15,9 @@ apt-get install -y zulu17-jdk
 export JAVA_HOME="$(update-java-alternatives -l | grep "1.17" | head -n 1 | tr -s " " | cut -d " " -f 3)"
 
 cd gradle-tests
-./gradlew nexusOneDebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect -Dandroid.experimental.androidTest.numManagedDeviceShards=1
+cp gradle/verification-metadata.xml.kokoro gradle/verification-metadata.xml
+
+./gradlew nexusOneDebugAndroidTest --write-verification-metadata sha256,pgp -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect -Dandroid.experimental.androidTest.numManagedDeviceShards=1
+
+cat gradle/verification-metadata.xml
 

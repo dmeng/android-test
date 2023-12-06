@@ -16,6 +16,10 @@ kt_jvm_library(
 kt_jvm_binary(
     name = "releaseupdater",
     srcs = ["Main.kt"],
+    resources = [
+        "//build_extensions:axt_released_versions.bzl",
+        "//build_extensions:axt_versions.bzl"
+    ],
     main_class = "androidx.test.tools.releaseupdater.Main",
     deps = [
         ":release_updater_lib",

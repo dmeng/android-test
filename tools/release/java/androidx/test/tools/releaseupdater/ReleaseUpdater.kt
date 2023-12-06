@@ -139,6 +139,22 @@ class ReleaseUpdater {
     }
   }
 
+  fun validateAndMakeRemoveDepsCommand(old_versions: Map<String, String>, new_versions: Map<String, String>): String {
+    val depsToRemove = mutableListOf<String>()
+
+    for (key in artifactMap.keys) {
+      if (old_versions[key] == new_versions[key]) {
+        depsToRemove.addAll(artifactMap[key] as Array<String>)
+      }
+    }
+
+    return if (depsToRemove.isEmpty()) {
+      ""
+    } else {
+      "buildozer 'remove srcs ${depsToRemove.joinToString(" ")}' //:axt_m2repository"
+    }
+  }
+
   companion object {
     private fun invalidSuffixException(new_suffix: String, old_suffix: String) =
       IllegalArgumentException(String.format("Invalid suffix %s after %s", new_suffix, old_suffix))
@@ -149,12 +165,12 @@ class ReleaseUpdater {
       IllegalArgumentException(String.format("Invalid version number %s after %s", new_number, old_number))
 
     private val artifactMap: Map<String, Array<String>> = mapOf(
-      "Annotation" to arrayOf("//annotation/java/androidx/test/annotation:annotation_maven_artifact"),
-      "Core" to arrayOf(
+      "ANNOTATION_VERSION" to arrayOf("//annotation/java/androidx/test/annotation:annotation_maven_artifact"),
+      "CORE_VERSION" to arrayOf(
         "//core/java/androidx/test/core:core_maven_artifact",
         "//ktx/core/java/androidx/test/core:core_maven_artifact",
       ),
-      "Espresso" to arrayOf(
+      "ESPRESSO_VERSION" to arrayOf(
         "//espresso/accessibility/java/androidx/test/espresso/accessibility:accessibility_checks_maven_artifact",
         "//espresso/contrib/java/androidx/test/espresso/contrib:espresso_contrib_maven_artifact",
         "//espresso/core/java/androidx/test/espresso:espresso_core_maven_artifact",
@@ -165,29 +181,29 @@ class ReleaseUpdater {
         "//espresso/remote/java/androidx/test/espresso/remote:espresso_remote_maven_artifact",
         "//espresso/web/java/androidx/test/espresso/web:espresso_web_maven_artifact",
       ),
-      "Espresso Device" to arrayOf(
+      "ESPRESSO_DEVICE_VERSION" to arrayOf(
         "//espresso/device/java/androidx/test/espresso/device:device_maven_artifact",
       ),
-      "JUnit Extensions" to arrayOf(
+      "ANDROIDX_JUNIT_VERSION" to arrayOf(
         "//ext/junit/java/androidx/test/ext/junit:junit_maven_artifact",
         "//ktx/ext/junit/java/androidx/test/ext/junit:junit_maven_artifact",
       ),
-      "Truth Extensions" to arrayOf(
+      "ANDROIDX_TRUTH_VERSION" to arrayOf(
         "//ext/truth/java/androidx/test/ext/truth:truth_maven_artifact",
       ),
-      "Monitor" to arrayOf(
+      "MONITOR_VERSION" to arrayOf(
         "//runner/monitor/java/androidx/test:monitor_maven_artifact",
       ),
-      "Orchestrator" to arrayOf(
+      "ORCHESTRATOR_VERSION" to arrayOf(
         "//runner/android_test_orchestrator/stubapp:orchestrator_release_maven_artifact",
       ),
-      "Runner" to arrayOf(
+      "RUNNER_VERSION" to arrayOf(
         "//runner/android_junit_runner/java/androidx/test:runner_maven_artifact",
       ),
-      "Rules" to arrayOf(
+      "RULES_VERSION" to arrayOf(
         "//runner/rules/java/androidx/test:rules_maven_artifact",
       ),
-      "Services" to arrayOf(
+      "SERVICES_VERSION" to arrayOf(
         "//services:test_services_maven_artifact",
         "//services/storage/java/androidx/test/services/storage:test_storage_maven_artifact",
       ),

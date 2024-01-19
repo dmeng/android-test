@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-   <activity
+  <application>
+    <activity
         android:label="screen orientation activity"
         android:name=".ScreenOrientationActivity"
         android:configChanges="orientation|screenSize"
-        android:exported="false"/>
+    android:exported="false"/>
+  </application>
 </manifest>
